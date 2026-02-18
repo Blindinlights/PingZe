@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Cipai, validatePoem, PoemValidation } from '../logic/prosody-engine.ts';
+import { Cipai, validatePoem, PoemValidation, LineSchema, ValidationResult } from '../logic/prosody-engine.ts';
 import { CIPAI_LIST } from '../data/cipai-list.ts';
 
 const translateTone = (tone: string) => {
@@ -38,7 +38,7 @@ export default function PoetryLinter() {
   let missingCount = 0;
 
   if (validation) {
-      selectedCipai.lines.forEach((lineSchema, idx) => {
+      selectedCipai.lines.forEach((lineSchema: LineSchema, idx: number) => {
           const lineResult = validation.lines[idx];
           const requiredLength = lineSchema.pattern.length;
           
@@ -48,7 +48,7 @@ export default function PoetryLinter() {
               if (filledCount < requiredLength) {
                   missingCount += (requiredLength - filledCount);
               }
-              lineResult.slots.forEach((slot: any) => {
+              lineResult.slots.forEach((slot: ValidationResult) => {
                   if (slot.isToneError) toneErrors++;
                   if (slot.isRhymeError) rhymeErrors++;
               });
