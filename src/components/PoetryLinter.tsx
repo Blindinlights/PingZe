@@ -149,14 +149,14 @@ export default function PoetryLinter() {
               const overflow = lineResult?.overflow || '';
 
               return (
-                <div key={lineIdx} className="flex flex-wrap items-center gap-x-4 gap-y-3 p-3 rounded-sm hover:bg-gray-50 transition-colors">
+                <div key={lineIdx} className="flex flex-wrap items-center gap-x-4 gap-y-3 p-3 rounded-sm hover:bg-gray-50 transition-colors duration-300">
                   <span className="text-gray-400 text-sm w-6 flex-shrink-0">{lineIdx + 1}</span>
                   
                   {/* Render Slots */}
                   {lineSchema.pattern.map((slotSchema, slotIdx) => {
                     const slotResult = slots[slotIdx];
                     
-                    let baseClasses = "w-12 h-12 flex items-center justify-center text-2xl cursor-help relative group transition-all duration-200 font-bold";
+                    let baseClasses = "w-12 h-12 flex items-center justify-center text-2xl cursor-help relative group font-bold transition-all duration-300";
                     let borderClass = "border-2 border-gray-200";
                     let textClass = "text-gray-300";
                     let bgClass = "bg-white";
@@ -221,12 +221,12 @@ export default function PoetryLinter() {
                         {content}
                         
                         {slotResult?.isPolyphonic && (
-                            <div className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-gray-400 opacity-60"></div>
+                            <div className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-gray-400 opacity-60 transition-opacity duration-300"></div>
                         )}
 
                         {slotSchema.isRhyme && (
                             <div 
-                              className={`absolute -bottom-2 -right-2 text-xs font-bold transform rotate-0 ${
+                              className={`absolute -bottom-2 -right-2 text-xs font-bold transform rotate-0 transition-all duration-300 ${
                                 (slotSchema.rhymeId || 0) % 2 === 0 ? 'text-[#6b5b95]' : 'text-[#c04851]'
                               }`} 
                               title={`韵脚位 (韵部：${slotSchema.rhymeId || 0})`}
