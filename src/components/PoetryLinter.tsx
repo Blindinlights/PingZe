@@ -59,7 +59,7 @@ export default function PoetryLinter() {
   return (
     <div className="flex flex-col h-full space-y-6">
       {/* Top Bar: Paper-like card */}
-      <div className="bg-paper shadow-sm border border-[#e5e7eb] p-5 rounded-sm flex items-center justify-between">
+      <div className="bg-paper shadow-md border-l-4 border-[#d6a45e] p-5 rounded-sm flex items-center justify-between">
         <div className="flex items-center space-x-4">
             <label className="font-bold text-[#2b2b2b] tracking-wider text-lg">词牌</label>
             <div className="relative">
@@ -98,68 +98,82 @@ export default function PoetryLinter() {
              
              <textarea
                 className="flex-1 w-full bg-transparent p-6 resize-none font-serif text-xl leading-loose focus:outline-none z-10 text-[#2b2b2b] placeholder-gray-300"
-                style={{ writingMode: 'horizontal-tb', minHeight: '500px' }} // Use style for min-height to allow growth
+                style={{ writingMode: 'horizontal-tb', minHeight: '500px' }}
                 placeholder="请输入诗词内容..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
              />
         </div>
 
-        {/* Visualizer Pane: Clean grid */}
-        <div className="md:w-2/3 bg-white p-8 rounded-sm shadow-sm border border-[#e5e7eb] relative">
+        {/* Visualizer Pane: Enhanced visibility */}
+        <div className="md:w-2/3 bg-white p-8 rounded-sm shadow-md border-l-4 border-[#7f8c5b] relative">
           
-          <div className="flex justify-between items-end mb-8 border-b border-gray-100 pb-2">
-            <h2 className="text-xl font-bold tracking-widest text-[#2b2b2b]">格律校验</h2>
-            <div className="text-sm">
+          <div className="flex justify-between items-end mb-8 border-b-2 border-gray-100 pb-3">
+            <h2 className="text-2xl font-bold tracking-widest text-[#2b2b2b]">格律校验</h2>
+            <div className="text-base font-medium">
                 {!hasInput ? (
-                    <span className="text-gray-300">待检测</span>
+                    <span className="text-gray-400">待检测</span>
                 ) : totalIssues > 0 ? (
-                    <span className="text-[#c04851]">
-                        共发现 {totalIssues} 处问题：
-                        {toneErrors > 0 && ` 平仄${toneErrors}`} 
-                        {rhymeErrors > 0 && ` 韵脚${rhymeErrors}`}
-                        {overflowCount > 0 && ` 多字${overflowCount}`}
-                        {missingCount > 0 && ` 缺字${missingCount}`}
+                    <span className="text-[#c04851] bg-red-50 px-4 py-2 rounded-sm border border-red-200">
+                        ⚠ 共发现 <strong className="text-lg">{totalIssues}</strong> 处问题
+                        {toneErrors > 0 && <span className="ml-3 inline-flex items-center"><span className="w-3 h-3 bg-[#4e7ca1] mr-1"></span>平仄 {toneErrors}</span>} 
+                        {rhymeErrors > 0 && <span className="ml-3 inline-flex items-center"><span className="w-3 h-3 bg-[#c04851] mr-1"></span>韵脚 {rhymeErrors}</span>}
+                        {overflowCount > 0 && <span className="ml-3">多字 {overflowCount}</span>}
+                        {missingCount > 0 && <span className="ml-3">缺字 {missingCount}</span>}
                     </span>
                 ) : (
-                    <span className="text-[#7f8c5b] flex items-center">
-                        <span className="mr-1">◈</span> 格律完美
+                    <span className="text-[#7f8c5b] bg-green-50 px-4 py-2 rounded-sm border border-green-200 flex items-center font-bold">
+                        <span className="mr-2 text-lg">✓</span> 格律完美
                     </span>
                 )}
             </div>
           </div>
           
-          {/* Legend - Minimalist */}
-          <div className="flex flex-wrap gap-6 mb-8 text-xs text-gray-500 justify-center">
-             <div className="flex items-center"><div className="w-3 h-3 border border-[#7f8c5b] bg-[#f4f6f0] mr-2"></div> 平</div>
-             <div className="flex items-center"><div className="w-3 h-3 border border-[#4e7ca1] bg-[#f0f4f8] mr-2"></div> 仄</div>
-             <div className="flex items-center"><div className="w-3 h-3 bg-[#c04851] mr-2"></div> 韵误</div>
+          {/* Legend - Enhanced visibility */}
+          <div className="flex flex-wrap gap-8 mb-8 text-sm font-medium bg-gray-50 p-4 rounded-sm border border-gray-200">
+             <div className="flex items-center"><div className="w-4 h-4 border-2 border-[#7f8c5b] bg-[#f4f6f0] mr-2 flex items-center justify-center text-xs text-[#3f4a28]">平</div> 平声</div>
+             <div className="flex items-center"><div className="w-4 h-4 border-2 border-[#6b5b95] bg-[#f5f3f9] mr-2 flex items-center justify-center text-xs text-[#6b5b95]">仄</div> 仄声</div>
+             <div className="flex items-center"><div className="w-4 h-4 border-2 border-[#c04851] bg-[#f9e3e5] mr-2 flex items-center justify-center text-xs text-[#c04851]">误</div> 平仄错误</div>
+             <div className="flex items-center"><div className="w-4 h-4 bg-[#c04851] mr-2 flex items-center justify-center text-xs text-white">错</div> 韵脚错误</div>
              <div className="flex items-center">
-                <span className="text-[#c04851] text-[10px]">▲</span>
-                <span className="text-[#4e7ca1] text-[10px] mr-1">▲</span>
-                韵位
+                <span className="text-[#c04851] text-xs font-bold mr-1">▲</span>
+                <span className="text-[#6b5b95] text-xs font-bold mr-2">▲</span>
+                韵脚位置
              </div>
           </div>
           
-          <div className="space-y-8 pl-4">
+          <div className="space-y-6 pl-2">
             {selectedCipai.lines.map((lineSchema, lineIdx) => {
               const lineResult = validation?.lines[lineIdx];
               const slots = lineResult?.slots || [];
               const overflow = lineResult?.overflow || '';
 
               return (
-                <div key={lineIdx} className="flex flex-wrap items-center gap-x-3 gap-y-4">
+                <div key={lineIdx} className="flex flex-wrap items-center gap-x-4 gap-y-3 p-3 rounded-sm hover:bg-gray-50 transition-colors">
+                  <span className="text-gray-400 text-sm w-6 flex-shrink-0">{lineIdx + 1}</span>
+                  
                   {/* Render Slots */}
                   {lineSchema.pattern.map((slotSchema, slotIdx) => {
                     const slotResult = slots[slotIdx];
                     
-                    // Visual State Logic
-                    let baseClasses = "w-10 h-10 flex items-center justify-center text-xl cursor-help relative group transition-all duration-200";
-                    let borderClass = "border-b border-gray-200"; // Default underline style
-                    let textClass = "text-gray-300"; // Default empty color
-                    let bgClass = "";
+                    let baseClasses = "w-12 h-12 flex items-center justify-center text-2xl cursor-help relative group transition-all duration-200 font-bold";
+                    let borderClass = "border-2 border-gray-200";
+                    let textClass = "text-gray-300";
+                    let bgClass = "bg-white";
                     let content = "○";
-                    let tooltip = `要求：${translateTone(slotSchema.tone)}`;
+                    let tooltip = `第${lineIdx + 1}句 第${slotIdx + 1}字 | 要求：${translateTone(slotSchema.tone)}`;
+
+                    // 根据格律要求设置背景色（即使没有填字也显示）
+                    if (slotSchema.tone === 'Ping') {
+                      borderClass = "border-2 border-[#7f8c5b]";
+                      bgClass = "bg-[#f4f6f0]";
+                      textClass = "text-[#7f8c5b]";
+                    } else if (slotSchema.tone === 'Ze') {
+                      borderClass = "border-2 border-[#6b5b95]";
+                      bgClass = "bg-[#f5f3f9]";
+                      textClass = "text-[#6b5b95]";
+                    }
+                    // 'Zhong' 保持灰色边框，无背景色
 
                     if (slotResult) {
                       content = slotResult.char;
@@ -170,49 +184,52 @@ export default function PoetryLinter() {
                       }
 
                       if (slotResult.isToneError) {
-                         // Tone Error: Blue hint
-                         borderClass = "border border-[#4e7ca1] rounded-sm";
-                         bgClass = "bg-[#f0f4f8]";
-                         textClass = "text-[#4e7ca1] font-bold";
-                         tooltip += ` | 实测：${translateTone(slotResult.actualTone)}`;
+                         borderClass = "border-2 border-[#c04851]";
+                         bgClass = "bg-[#f9e3e5]";
+                         textClass = "text-[#c04851]";
+                         tooltip += ` | ❌ 实测：${translateTone(slotResult.actualTone)}`;
                       } else if (slotResult.isRhymeError) {
-                         // Rhyme Error: Red fill
-                         borderClass = "border border-[#c04851] rounded-sm";
-                         bgClass = "bg-[#c04851]";
-                         textClass = "text-white";
-                         tooltip += ` | 韵脚错误 (韵部 ${slotResult.rhymeGroup})`;
+                         borderClass = "border-2 border-[#c04851]";
+                         bgClass = "bg-[#f9e3e5]";
+                         textClass = "text-[#c04851]";
+                         tooltip += ` | ❌ 韵脚错误 (韵部 ${slotResult.rhymeGroup})`;
                       } else {
-                         // Correct: Simple clean look, maybe green underline check
-                         // borderClass = "border-b-2 border-[#7f8c5b]";
-                         borderClass = "border border-[#7f8c5b] rounded-sm";
-                         bgClass = "bg-[#f4f6f0]";
-                         textClass = "text-[#3f4a28]";
-                         tooltip += " | 平仄正确";
+                         // 正确填字：根据实际格律显示对应颜色
+                         if (slotSchema.tone === 'Ping') {
+                           borderClass = "border-2 border-[#7f8c5b]";
+                           bgClass = "bg-[#f4f6f0]";
+                           textClass = "text-[#3f4a28]";
+                         } else if (slotSchema.tone === 'Ze') {
+                           borderClass = "border-2 border-[#6b5b95]";
+                           bgClass = "bg-[#f5f3f9]";
+                           textClass = "text-[#5a4a7a]";
+                         } else {
+                           borderClass = "border-2 border-[#7f8c5b]";
+                           bgClass = "bg-[#f4f6f0]";
+                           textClass = "text-[#3f4a28]";
+                         }
+                         tooltip += " | ✓ 正确";
                       }
-                      
-                      // Rhyme indicator logic moved to triangle below
                     }
 
                     return (
                       <div 
                         key={slotIdx}
-                        className={`${baseClasses} ${borderClass} ${bgClass} ${textClass}`}
+                        className={`${baseClasses} ${borderClass} ${bgClass} ${textClass} hover:scale-110 hover:shadow-md`}
                         title={tooltip}
                       >
                         {content}
                         
-                        {/* Polyphonic Dot */}
                         {slotResult?.isPolyphonic && (
-                            <div className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-gray-400 opacity-50"></div>
+                            <div className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-gray-400 opacity-60"></div>
                         )}
 
-                        {/* Rhyme Triangle Indicator */}
                         {slotSchema.isRhyme && (
                             <div 
-                              className={`absolute -bottom-1.5 -right-1.5 text-[10px] transform rotate-0 ${
-                                (slotSchema.rhymeId || 0) % 2 === 0 ? 'text-[#4e7ca1]' : 'text-[#c04851]'
+                              className={`absolute -bottom-2 -right-2 text-xs font-bold transform rotate-0 ${
+                                (slotSchema.rhymeId || 0) % 2 === 0 ? 'text-[#6b5b95]' : 'text-[#c04851]'
                               }`} 
-                              title={`韵脚位 (ID: ${slotSchema.rhymeId || 0})`}
+                              title={`韵脚位 (韵部：${slotSchema.rhymeId || 0})`}
                             >
                                 ▲
                             </div>
@@ -221,9 +238,9 @@ export default function PoetryLinter() {
                     );
                   })}
 
-                  {/* Overflow Text */}
                   {overflow && (
-                    <div className="text-[#c04851] text-sm font-mono opacity-80" title="超出字数">
+                    <div className="text-[#c04851] text-base font-bold opacity-90 bg-red-50 px-2 py-1 rounded border border-red-200" title="超出字数">
+                       <span className="text-xs mr-1">多</span>
                        {overflow.split('').map((c, i) => (
                            <span key={i} className="line-through mx-0.5">{c}</span>
                        ))}

@@ -1,5 +1,6 @@
 import { pinyin } from 'pinyin-pro';
 import { getRhymeGroup, RHYME_GROUPS } from './rhyme-map.ts';
+import { getCilinTone, isInCilin } from './cilin-rhyme.ts';
 
 export type ToneType = 'Ping' | 'Ze' | 'Zhong'; // Zhong means allowed both
 
@@ -55,7 +56,29 @@ function stripTones(str: string): string {
 }
 
 function getPotentialProsody(char: string): ProsodyCandidate[] {
-  // @ts-ignore: pinyin-pro types might be tricky in Deno sometimes, but standard import should work
+  // Step 1: Try Cilin Rhyme first (classical rhyme system)
+  const cilinTone = getCilinTone(char);
+  
+  if (cilinTone) {
+    // Character found in Cilin, use it as primary source
+    // Still get pinyin info for rhyme group calculation
+    const items = pinyin(char, { multiple: true, type: 'all' });
+    const pinyinInfo = items && items.length > 0 ? items[0] : null;
+    
+    const rhymeGroup = pinyinInfo 
+      ? getRhymeGroup(stripTones(pinyinInfo.final), pinyinInfo.initial)
+      : null;
+    const pinyinStr = pinyinInfo?.pinyin || '?';
+    
+    return [{
+      tone: cilinTone,
+      rhymeGroup,
+      pinyin: pinyinStr
+    }];
+  }
+  
+  // Step 2: Fallback to modern pinyin-based detection
+  // @ts-ignore: pinyin-pro types might be tricky in Deno sometimes
   const items = pinyin(char, { multiple: true, type: 'all' });
   
   if (!items || !Array.isArray(items) || items.length === 0) {
