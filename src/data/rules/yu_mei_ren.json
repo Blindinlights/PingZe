@@ -1,0 +1,269 @@
+{
+  "name": "虞美人",
+  "lines": [
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": true,
+          "rhymeId": 2
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": true,
+          "rhymeId": 2
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 3
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 3
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": true,
+          "rhymeId": 4
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Zhong",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": true,
+          "rhymeId": 4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "name": "忆秦娥",
+  "lines": [
+    {
+      "pattern": [
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "repeatLineId": 1,
+      "pattern": [
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    }
+  ]
+}

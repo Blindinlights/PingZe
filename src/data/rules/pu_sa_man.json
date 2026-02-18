@@ -1,0 +1,121 @@
+{
+  "name": "菩萨蛮",
+  "lines": [
+    {
+      "pattern": [
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": true,
+          "rhymeId": 1
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": true,
+          "rhymeId": 2
+        }
+      ]
+    },
+    {
+      "pattern": [
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ze",
+          "isRhyme": false
+        },
+        {
+          "tone": "Ping",
+          "isRhyme": true,
+          "rhymeId": 2
+        }
+      ]
+    }
+  ]
+}
