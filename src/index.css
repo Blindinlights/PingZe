@@ -2,47 +2,202 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-paper: #f7f4ed; /* Warm rice paper */
-  --color-ink: #2b2b2b; /* Deep charcoal ink */
-  --color-cinnabar: #c04851; /* Traditional red */
-  --color-indigo: #4e7ca1; /* Muted indigo */
-  --color-bamboo: #7f8c5b; /* Muted green */
-  --color-ochre: #d6a45e; /* Muted gold/yellow */
-  
-  /* Status colors mapped to theme */
-  --color-success: var(--color-bamboo);
-  --color-error: var(--color-cinnabar);
-  --color-info: var(--color-indigo);
-  --color-warn: var(--color-ochre);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap');
 
+:root {
+  /* 传统中国色 */
+  --color-xuan-paper: #f8f5f0; /* 宣纸白 */
+  --color-mi-se: #f5f0e8; /* 秘色瓷 */
+  --color-ink-black: #1a1a1a; /* 墨黑 */
+  --color-ink-light: #2b2b2b; /* 淡墨 */
+  --color-zhu-sha: #c04851; /* 朱砂 */
+  --color-yan-zhi: #d66a72; /* 胭脂 */
+  --color-qing-dai: #4e7ca1; /* 青黛 */
+  --color-shi-lu: #7f8c5b; /* 石绿 */
+  --color-liu-huang: #d6a45e; /* 流黄/金黄 */
+  --color-zi-tan: #5d4037; /* 紫檀 */
+  --color-qing-hua: #6b8c9e; /* 青花 */
+  
+  /* 渐变 */
+  --gradient-paper: linear-gradient(135deg, #f8f5f0 0%, #f0ede6 50%, #e8e4dc 100%);
+  --gradient-gold: linear-gradient(135deg, #d6a45e 0%, #c9964a 50%, #b8863a 100%);
+  --gradient-ink: linear-gradient(180deg, #1a1a1a 0%, #2b2b2b 100%);
+  
+  /* 阴影 */
+  --shadow-soft: 0 2px 8px rgba(26, 26, 26, 0.08);
+  --shadow-medium: 0 4px 16px rgba(26, 26, 26, 0.12);
+  --shadow-deep: 0 8px 32px rgba(26, 26, 26, 0.16);
+  --shadow-inner: inset 0 1px 3px rgba(26, 26, 26, 0.06);
+  
+  /* 字体 */
   --font-serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Songti SC", serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #f0f0f2;
-  color: var(--color-ink);
+  background: var(--gradient-paper);
+  background-attachment: fixed;
+  color: var(--color-ink-light);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(214, 164, 94, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-liu-huang) 0%, #b8863a 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e0b068 0%, #c9964a 100%);
+}
+
+/* 宣纸纹理效果 */
+.bg-paper {
+  background-color: var(--color-xuan-paper);
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.025' fill-rule='evenodd'/%3E%3C/svg%3E");
+  box-shadow: var(--shadow-soft);
+}
+
+/* 传统回纹边框 */
+.border-huiwen {
+  position: relative;
+}
+
+.border-huiwen::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      var(--color-liu-huang) 0px,
+      var(--color-liu-huang) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  z-index: -1;
+  border-radius: inherit;
+}
+
+/* 云纹装饰 */
+.yunwen-corner {
+  position: relative;
+}
+
+.yunwen-corner::after {
+  content: '☁';
+  position: absolute;
+  font-size: 24px;
+  color: var(--color-liu-huang);
+  opacity: 0.3;
+}
+
+.yunwen-corner.top-left::after { top: -8px; left: -8px; }
+.yunwen-corner.top-right::after { top: -8px; right: -8px; transform: scaleX(-1); }
+.yunwen-corner.bottom-left::after { bottom: -8px; left: -8px; transform: scaleY(-1); }
+.yunwen-corner.bottom-right::after { bottom: -8px; right: -8px; transform: scale(-1); }
+
+/* 渐变文字 */
+.text-gradient-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 墨迹效果 */
+.ink-wash {
+  position: relative;
+}
+
+.ink-wash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(26, 26, 26, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* 传统印章效果 */
+.seal-stamp {
+  border: 2px solid var(--color-zhu-sha);
+  background: rgba(192, 72, 81, 0.08);
+  color: var(--color-zhu-sha);
   font-family: var(--font-serif);
 }
 
-/* Custom scrollbar for cleaner look */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+/* 竖排文字 */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
 }
 
-/* Utilities for paper texture effect */
-.bg-paper {
-  background-color: var(--color-paper);
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(214, 164, 94, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 悬停效果增强 */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-deep);
+}
+
+/* 聚焦环 */
+.focus-ring-gold {
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.focus-ring-gold:focus {
+  box-shadow: 0 0 0 3px rgba(214, 164, 94, 0.3);
 }
