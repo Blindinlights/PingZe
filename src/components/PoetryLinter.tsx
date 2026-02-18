@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Cipai, validatePoem, PoemValidation } from '../logic/prosody-engine.ts';
 import { CIPAI_LIST } from '../data/cipai-list.ts';
 
@@ -14,6 +14,8 @@ export default function PoetryLinter() {
   const [selectedCipai, setSelectedCipai] = useState<Cipai>(CIPAI_LIST[0]);
   const [input, setInput] = useState('');
   const [validation, setValidation] = useState<PoemValidation | null>(null);
+  const [isCipaiOpen, setIsCipaiOpen] = useState(false);
+  const cipaiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (selectedCipai) {
@@ -21,10 +23,15 @@ export default function PoetryLinter() {
     }
   }, [input, selectedCipai]);
 
-  const handleCipaiChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const idx = parseInt(e.target.value);
-    setSelectedCipai(CIPAI_LIST[idx]);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cipaiRef.current && !cipaiRef.current.contains(event.target as Node)) {
+        setIsCipaiOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Calculate stats
   let toneErrors = 0;
@@ -62,18 +69,38 @@ export default function PoetryLinter() {
       <div className="bg-paper shadow-md border-l-4 border-[#d6a45e] p-5 rounded-sm flex items-center justify-between">
         <div className="flex items-center space-x-4">
             <label className="font-bold text-[#2b2b2b] tracking-wider text-lg">词牌</label>
-            <div className="relative">
-                <select 
-                className="appearance-none bg-transparent border-b-2 border-[#d6a45e] pr-8 py-1 font-serif text-lg focus:outline-none focus:border-[#c04851] cursor-pointer"
-                onChange={handleCipaiChange}
+            <div className="relative" ref={cipaiRef}>
+                <button 
+                  className="flex items-center space-x-2 bg-gradient-to-r from-[#faf9f6] to-[#f5f3f0] border-2 border-[#d6a45e] px-6 py-2 rounded-sm hover:border-[#c04851] hover:shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#c04851]/30"
+                  onClick={() => setIsCipaiOpen(!isCipaiOpen)}
                 >
-                {CIPAI_LIST.map((c, i) => (
-                    <option key={c.name} value={i}>{c.name}</option>
-                ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-[#d6a45e]">
-                    ▼
-                </div>
+                  <span className="font-serif text-lg text-[#2b2b2b] tracking-wider">{selectedCipai.name}</span>
+                  <span className={`text-[#d6a45e] text-sm transition-transform duration-300 ${isCipaiOpen ? 'rotate-180' : ''}`}>▼</span>
+                </button>
+                
+                {isCipaiOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 max-h-80 overflow-y-auto bg-[#faf9f6] border border-[#d6a45e] rounded-sm shadow-xl z-50">
+                    <div className="py-1">
+                      {CIPAI_LIST.map((cipai, index) => (
+                        <button
+                          key={cipai.name}
+                          className={`w-full text-left px-6 py-3 font-serif text-[#2b2b2b] hover:bg-[#f5f3f0] hover:text-[#c04851] transition-colors duration-200 flex items-center justify-between group ${
+                            selectedCipai.name === cipai.name ? 'bg-[#f0ede6] text-[#c04851] font-bold' : ''
+                          }`}
+                          onClick={() => {
+                            setSelectedCipai(cipai);
+                            setIsCipaiOpen(false);
+                          }}
+                        >
+                          <span className="tracking-wide">{cipai.name}</span>
+                          {selectedCipai.name === cipai.name && (
+                            <span className="text-[#d6a45e] text-xs">✓</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
             </div>
         </div>
 
