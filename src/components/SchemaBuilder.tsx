@@ -172,7 +172,7 @@ export default function SchemaBuilder() {
           </label>
           <input
             type="text"
-            className="bg-white border-2 border-[#e5e7eb] rounded-sm px-5 py-3.5 font-serif text-lg focus:outline-none focus:border-[#d6a45e] focus:ring-4 focus:ring-[#d6a45e]/20 transition-all duration-300 text-[#1a1a1a] placeholder-[#2b2b2b]/40"
+            className="bg-white border-2 border-[#e5e7eb] rounded-sm px-5 py-3.5 font-serif text-lg focus:outline-none focus:border-[#d6a45e] focus:ring-4 focus:ring-[#d6a45e]/20 transition-all duration-200 ease-out text-[#1a1a1a] placeholder-[#2b2b2b]/40 hover:border-[#d6a45e]/50"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="例如：长相思、浣溪沙、菩萨蛮"
@@ -197,13 +197,13 @@ export default function SchemaBuilder() {
             <span>格律定义</span>
           </label>
           <textarea
-            className="flex-1 min-h-[320px] bg-white border-2 border-[#e5e7eb] rounded-sm p-6 font-serif text-xl leading-relaxed resize-y focus:outline-none focus:border-[#7f8c5b] focus:ring-4 focus:ring-[#7f8c5b]/20 transition-all duration-300 text-[#1a1a1a] placeholder-[#2b2b2b]/40"
+            className="flex-1 min-h-[320px] bg-white border-2 border-[#e5e7eb] rounded-sm p-6 font-serif text-xl leading-relaxed resize-y focus:outline-none focus:border-[#7f8c5b] focus:ring-4 focus:ring-[#7f8c5b]/20 transition-all duration-200 ease-out text-[#1a1a1a] placeholder-[#2b2b2b]/40 hover:border-[#7f8c5b]/50"
             value={patternInput}
             onChange={(e) => setPatternInput(e.target.value)}
             placeholder={`请输入格律格式，例如：\n\n平平仄仄平平仄 [韵]\n通仄平平仄 [韵]\n通仄平平平仄仄\n仄平平仄仄平平 [韵]`}
           />
           {error && (
-            <div className="flex items-center space-x-2 text-[#c04851] bg-gradient-to-r from-[#fef5f6] to-[#fdf0f2] px-4 py-3 rounded-sm border border-[#c04851]/30 animate-fade-in">
+            <div className="flex items-center space-x-2 text-[#c04851] bg-gradient-to-r from-[#fef5f6] to-[#fdf0f2] px-4 py-3 rounded-sm border border-[#c04851]/30 animate-fade-in-down">
               <svg
                 className="w-5 h-5 flex-shrink-0"
                 fill="currentColor"
@@ -222,7 +222,7 @@ export default function SchemaBuilder() {
 
         <div className="py-4">
           <button
-            className="group relative inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#5d4037] to-[#4a332a] text-white font-semibold py-4 px-10 rounded-sm hover:from-[#6d5047] hover:to-[#5a433a] transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#5d4037]/40 overflow-hidden"
+            className="group relative inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#5d4037] to-[#4a332a] text-white font-semibold py-4 px-10 rounded-sm hover:from-[#6d5047] hover:to-[#5a433a] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 ease-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#5d4037]/40 overflow-hidden"
             onClick={parsePattern}
             type="button"
           >
@@ -248,7 +248,7 @@ export default function SchemaBuilder() {
 
       {/* 生成结果 */}
       {generatedSchema && (
-        <div className="mt-6 pt-8 border-t-2 border-[#d6a45e]/30 animate-fade-in">
+        <div className="mt-6 pt-8 border-t-2 border-[#d6a45e]/30 animate-scale-in">
           <div className="flex items-center justify-between mb-4">
             <label className="font-semibold text-[#1a1a1a] tracking-wider flex items-center space-x-2">
               <svg
@@ -284,7 +284,7 @@ export default function SchemaBuilder() {
             </span>
           </div>
           <textarea
-            className="w-full min-h-[220px] bg-gradient-to-br from-[#faf9f6] to-[#f5f3f0] border-2 border-[#d6a45e]/40 rounded-sm p-5 font-mono text-sm text-[#1a1a1a] focus:outline-none focus:border-[#d6a45e] focus:ring-4 focus:ring-[#d6a45e]/20 transition-all duration-300 resize-y"
+            className="w-full min-h-[220px] bg-gradient-to-br from-[#faf9f6] to-[#f5f3f0] border-2 border-[#d6a45e]/40 rounded-sm p-5 font-mono text-sm text-[#1a1a1a] focus:outline-none focus:border-[#d6a45e] focus:ring-4 focus:ring-[#d6a45e]/20 transition-all duration-200 ease-out resize-y hover:border-[#d6a45e]/60"
             readOnly
             value={generatedSchema}
           />

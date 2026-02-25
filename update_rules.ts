@@ -4,6 +4,17 @@ import { join } from "std/path";
 const RULES_DIR = "src/data/rules";
 const OUTPUT_FILE = "src/data/cipai-list.ts";
 
+function toSafeIdentifier(filename: string): string {
+  // Convert a JSON filename to a stable, JS-safe identifier.
+  const base = filename.replace(/\.[^.]+$/, "");
+  const normalized = base.replace(/[^a-zA-Z0-9]+/g, "_").replace(
+    /^_+|_+$/g,
+    "",
+  );
+  const prefixed = normalized.match(/^[0-9]/) ? `_${normalized}` : normalized;
+  return prefixed.length > 0 ? prefixed : "rule";
+}
+
 async function main() {
   const imports: string[] = [];
   const exportItems: string[] = [];
@@ -13,20 +24,18 @@ async function main() {
   let count = 0;
   for await (const file of expandGlob(join(RULES_DIR, "*.json"))) {
     const filename = file.name;
-    const varName = filename.replace(/[^a-zA-Z0-9]/g, "_").replace(
-      /^([0-9])/,
-      "_$1",
-    );
+    const varName = toSafeIdentifier(filename);
     const importPath = `./rules/${filename}`;
 
     imports.push(
       `import ${varName} from '${importPath}' with { type: "json" };`,
     );
-    exportItems.push(`${varName} as unknown as Cipai`);
+    // Deno's JSON import types are `unknown` by default. Assert to Cipai for downstream usage.
+    exportItems.push(`${varName} satisfies Cipai`);
     count++;
   }
 
-  let content = "import { Cipai } from '../logic/prosody-engine.ts';\n";
+  let content = "import { type Cipai } from '../logic/prosody-engine.ts';\n";
 
   for (const imp of imports) {
     content += imp + "\n";

@@ -60,7 +60,7 @@ function App() {
         {/* 导航标签 */}
         <nav className="mt-10 inline-flex items-center space-x-2 p-1.5 bg-[#f0ede6]/80 backdrop-blur-sm rounded-sm border border-[#d6a45e]/30 shadow-md">
           <button
-            className={`px-10 py-3 text-base tracking-[0.2em] transition-all duration-500 relative group ${
+            className={`px-10 py-3 text-base tracking-[0.2em] transition-all duration-300 ease-out relative group ${
               activeTab === "linter"
                 ? "text-[#1a1a1a] font-semibold"
                 : "text-[#2b2b2b]/60 hover:text-[#1a1a1a]"
@@ -69,20 +69,22 @@ function App() {
             type="button"
           >
             {activeTab === "linter" && (
-              <span className="absolute inset-0 bg-gradient-to-b from-[#d6a45e]/20 to-transparent rounded-sm">
-              </span>
+              <>
+                <span className="absolute inset-0 bg-gradient-to-b from-[#d6a45e]/20 to-transparent rounded-sm animate-scale-in">
+                </span>
+                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c04851] to-transparent animate-fade-in">
+                </span>
+              </>
             )}
-            <span className="relative z-10">格律检测</span>
-            {activeTab === "linter" && (
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c04851] to-transparent">
-              </span>
-            )}
+            <span className="relative z-10 group-hover:scale-105 transition-transform duration-300">
+              格律检测
+            </span>
           </button>
 
           <div className="w-px h-6 bg-[#d6a45e]/30"></div>
 
           <button
-            className={`px-10 py-3 text-base tracking-[0.2em] transition-all duration-500 relative group ${
+            className={`px-10 py-3 text-base tracking-[0.2em] transition-all duration-300 ease-out relative group ${
               activeTab === "builder"
                 ? "text-[#1a1a1a] font-semibold"
                 : "text-[#2b2b2b]/60 hover:text-[#1a1a1a]"
@@ -91,14 +93,16 @@ function App() {
             type="button"
           >
             {activeTab === "builder" && (
-              <span className="absolute inset-0 bg-gradient-to-b from-[#d6a45e]/20 to-transparent rounded-sm">
-              </span>
+              <>
+                <span className="absolute inset-0 bg-gradient-to-b from-[#d6a45e]/20 to-transparent rounded-sm animate-scale-in">
+                </span>
+                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c04851] to-transparent animate-fade-in">
+                </span>
+              </>
             )}
-            <span className="relative z-10">制谱工具</span>
-            {activeTab === "builder" && (
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c04851] to-transparent">
-              </span>
-            )}
+            <span className="relative z-10 group-hover:scale-105 transition-transform duration-300">
+              制谱工具
+            </span>
           </button>
         </nav>
       </header>

@@ -45,6 +45,7 @@ export default function PoetryLinter() {
   let rhymeErrors = 0;
   let overflowCount = 0;
   let missingCount = 0;
+  let requiredCharErrors = 0;
 
   if (validation) {
     selectedCipai.lines.forEach((lineSchema: LineSchema, idx: number) => {
@@ -53,13 +54,11 @@ export default function PoetryLinter() {
 
       if (lineResult) {
         if (lineResult.overflow) overflowCount += lineResult.overflow.length;
-        const filledCount = lineResult.slots.length;
-        if (filledCount < requiredLength) {
-          missingCount += requiredLength - filledCount;
-        }
+        missingCount += lineResult.missingCount;
         lineResult.slots.forEach((slot: ValidationResult) => {
           if (slot.isToneError) toneErrors++;
           if (slot.isRhymeError) rhymeErrors++;
+          if (slot.isRequiredCharError) requiredCharErrors++;
         });
       } else {
         missingCount += requiredLength;
@@ -67,7 +66,8 @@ export default function PoetryLinter() {
     });
   }
 
-  const totalIssues = toneErrors + rhymeErrors + overflowCount + missingCount;
+  const totalIssues = toneErrors + rhymeErrors + overflowCount + missingCount +
+    requiredCharErrors;
   const hasInput = input.trim().length > 0;
   const isPerfect = hasInput && totalIssues === 0;
 
@@ -95,7 +95,7 @@ export default function PoetryLinter() {
 
             <div className="relative" ref={cipaiRef}>
               <button
-                className="group flex items-center space-x-3 bg-gradient-to-r from-[#faf9f6] to-[#f5f3f0] border border-[#d6a45e]/60 px-8 py-3 rounded-sm hover:border-[#c04851] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#c04851]/30 min-w-[200px]"
+                className="group flex items-center space-x-3 bg-gradient-to-r from-[#faf9f6] to-[#f5f3f0] border border-[#d6a45e]/60 px-8 py-3 rounded-sm hover:border-[#c04851] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[#c04851]/30 min-w-[200px]"
                 onClick={() => setIsCipaiOpen(!isCipaiOpen)}
                 type="button"
               >
@@ -124,12 +124,12 @@ export default function PoetryLinter() {
               </button>
 
               {isCipaiOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 max-h-96 overflow-y-auto bg-[#faf9f6] border border-[#d6a45e]/40 rounded-sm shadow-2xl z-50 animate-fade-in">
+                <div className="absolute top-full left-0 mt-2 w-72 max-h-96 overflow-y-auto bg-[#faf9f6] border border-[#d6a45e]/40 rounded-sm shadow-2xl z-50 animate-scale-in">
                   <div className="py-2">
                     {CIPAI_LIST.map((cipai) => (
                       <button
                         key={cipai.name}
-                        className={`w-full text-left px-8 py-3.5 font-serif text-[#1a1a1a] hover:bg-gradient-to-r hover:from-[#f5f3f0] hover:to-[#f0ede6] transition-all duration-200 flex items-center justify-between group ${
+                        className={`w-full text-left px-8 py-3.5 font-serif text-[#1a1a1a] hover:bg-gradient-to-r hover:from-[#f5f3f0] hover:to-[#f0ede6] transition-all duration-200 ease-out active:scale-[0.98] flex items-center justify-between group ${
                           selectedCipai.name === cipai.name
                             ? "bg-gradient-to-r from-[#f0ede6] to-[#ebe7e0] text-[#c04851] font-semibold border-l-4 border-[#c04851]"
                             : "border-l-4 border-transparent"
@@ -289,7 +289,7 @@ export default function PoetryLinter() {
                   )
                   : isPerfect
                   ? (
-                    <div className="flex items-center space-x-3 text-[#7f8c5b] bg-gradient-to-r from-[#f0f6eb] to-[#ebf2e3] px-6 py-3 rounded-sm border border-[#7f8c5b]/30 shadow-sm animate-fade-in">
+                    <div className="flex items-center space-x-3 text-[#7f8c5b] bg-gradient-to-r from-[#f0f6eb] to-[#ebf2e3] px-6 py-3 rounded-sm border border-[#7f8c5b]/30 shadow-sm animate-fade-in-up">
                       <svg
                         className="w-6 h-6"
                         fill="currentColor"
@@ -307,7 +307,7 @@ export default function PoetryLinter() {
                     </div>
                   )
                   : (
-                    <div className="flex items-center space-x-4 text-[#c04851] bg-gradient-to-r from-[#fef5f6] to-[#fdf0f2] px-6 py-3 rounded-sm border border-[#c04851]/30 shadow-sm animate-fade-in">
+                    <div className="flex items-center space-x-4 text-[#c04851] bg-gradient-to-r from-[#fef5f6] to-[#fdf0f2] px-6 py-3 rounded-sm border border-[#c04851]/30 shadow-sm animate-fade-in-up">
                       <svg
                         className="w-6 h-6 flex-shrink-0"
                         fill="currentColor"
@@ -400,10 +400,10 @@ export default function PoetryLinter() {
                   return (
                     <div
                       key={lineIdx}
-                      className="flex flex-wrap items-center gap-x-4 gap-y-3 p-4 rounded-sm hover:bg-gradient-to-r hover:from-[#f5f3f0] hover:to-[#f0ede6] transition-all duration-300 group"
+                      className="flex flex-wrap items-center gap-x-4 gap-y-3 p-4 rounded-sm hover:bg-gradient-to-r hover:from-[#f5f3f0] hover:to-[#f0ede6] transition-all duration-200 ease-out group"
                     >
                       {/* 行号 */}
-                      <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-gradient-to-br from-[#d6a45e]/20 to-[#d6a45e]/10 border border-[#d6a45e]/30 flex items-center justify-center">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-gradient-to-br from-[#d6a45e]/20 to-[#d6a45e]/10 border border-[#d6a45e]/30 flex items-center justify-center transition-all duration-200 ease-out group-hover:scale-105">
                         <span className="text-[#d6a45e] font-bold text-sm tracking-wider">
                           {String(lineIdx + 1).padStart(2, "0")}
                         </span>
@@ -415,7 +415,7 @@ export default function PoetryLinter() {
                           const slotResult = slots[slotIdx];
 
                           const baseClasses =
-                            "w-14 h-14 flex items-center justify-center text-2xl cursor-help relative group/slot font-bold transition-all duration-300 rounded-sm";
+                            "w-14 h-14 flex items-center justify-center text-2xl cursor-help relative group/slot font-bold transition-all duration-200 ease-out rounded-sm";
                           let borderClass = "border-2 border-[#e5e7eb]";
                           let textClass = "text-[#d1d5db]";
                           let bgClass = "bg-white";
@@ -487,7 +487,7 @@ export default function PoetryLinter() {
                           return (
                             <div
                               key={slotIdx}
-                              className={`${baseClasses} ${borderClass} ${bgClass} ${textClass} ${shadowClass} hover:scale-110 hover:shadow-lg`}
+                              className={`${baseClasses} ${borderClass} ${bgClass} ${textClass} ${shadowClass} hover:scale-110 hover:shadow-lg active:scale-95`}
                               title={tooltip}
                             >
                               {content}
@@ -499,7 +499,7 @@ export default function PoetryLinter() {
 
                               {slotSchema.isRhyme && (
                                 <div
-                                  className={`absolute -bottom-1.5 -right-1.5 text-sm font-bold transform transition-all duration-300 group-hover/slot:scale-125 ${
+                                  className={`absolute -bottom-1.5 -right-1.5 text-sm font-bold transform transition-all duration-200 ease-out group-hover/slot:scale-125 group-hover/slot:animate-pulse ${
                                     (slotSchema.rhymeId || 0) % 2 === 0
                                       ? "text-[#4e7ca1] drop-shadow-sm"
                                       : "text-[#c04851] drop-shadow-sm"

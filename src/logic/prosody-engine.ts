@@ -4,6 +4,8 @@ import { getCilinTone } from "./cilin-rhyme.ts";
 
 export type ToneType = "Ping" | "Ze" | "Zhong"; // Zhong means allowed both
 
+type DefiniteTone = "Ping" | "Ze";
+
 export interface SlotSchema {
   tone: ToneType;
   isRhyme: boolean;
@@ -25,8 +27,9 @@ export interface Cipai {
 export interface ValidationResult {
   char: string;
   expectedTone: ToneType;
-  actualTone: "Ping" | "Ze";
+  actualTone: DefiniteTone;
   isToneError: boolean;
+  isRequiredCharError: boolean;
   isRhymePosition: boolean;
   isRhymeError: boolean;
   isPolyphonic: boolean;
@@ -38,6 +41,7 @@ export interface ValidationResult {
 export interface LineValidationResult {
   slots: ValidationResult[];
   overflow: string;
+  missingCount: number;
 }
 
 export interface PoemValidation {
@@ -46,7 +50,7 @@ export interface PoemValidation {
 }
 
 interface ProsodyCandidate {
-  tone: "Ping" | "Ze";
+  tone: DefiniteTone;
   rhymeGroup: string | null;
   pinyin: string;
 }
@@ -56,6 +60,19 @@ interface PinyinInfo {
   final: string;
   initial: string;
   pinyin: string;
+}
+
+function isPinyinInfoArray(value: unknown): value is PinyinInfo[] {
+  if (!Array.isArray(value)) return false;
+  if (value.length === 0) return false;
+  return value.every((v) => {
+    if (typeof v !== "object" || v === null) return false;
+    const rec = v as Record<string, unknown>;
+    return typeof rec.num === "number" &&
+      typeof rec.final === "string" &&
+      typeof rec.initial === "string" &&
+      typeof rec.pinyin === "string";
+  });
 }
 
 function stripTones(str: string): string {
@@ -70,8 +87,8 @@ function getPotentialProsody(char: string): ProsodyCandidate[] {
   if (cilinTone) {
     // Character found in Cilin, use it as primary source
     // Still get pinyin info for rhyme group calculation
-    const items = pinyin(char, { multiple: true, type: "all" });
-    const pinyinInfo = items && items.length > 0 ? items[0] : null;
+    const items = pinyin(char, { multiple: true, type: "all" }) as unknown;
+    const pinyinInfo = isPinyinInfoArray(items) ? items[0] : null;
 
     const rhymeGroup = pinyinInfo
       ? getRhymeGroup(stripTones(pinyinInfo.final), pinyinInfo.initial)
@@ -86,16 +103,15 @@ function getPotentialProsody(char: string): ProsodyCandidate[] {
   }
 
   // Step 2: Fallback to modern pinyin-based detection
-  // @ts-ignore: pinyin-pro types might be tricky in Deno sometimes
-  const items = pinyin(char, { multiple: true, type: "all" });
+  const items = pinyin(char, { multiple: true, type: "all" }) as unknown;
 
-  if (!items || !Array.isArray(items) || items.length === 0) {
+  if (!isPinyinInfoArray(items)) {
     // Fallback for unknown chars
     return [{ tone: "Ze", rhymeGroup: null, pinyin: "?" }];
   }
 
-  return items.map((item: PinyinInfo) => {
-    let tone: "Ping" | "Ze" = "Ping";
+  return items.map((item) => {
+    let tone: DefiniteTone = "Ping";
     // 1, 2 -> Ping; 3, 4 -> Ze;
     // Treat neutral (5/0) as Ze for safety
     if (item.num === 3 || item.num === 4 || item.num === 0 || item.num === 5) {
@@ -135,8 +151,14 @@ function inferRhymeGroups(
   // Group characters by rhymeId
   const rhymeCharMap: Record<number, string[]> = {};
 
+  const resolveLineIndex = (idx: number): number => {
+    const repeatOf = cipai.lines[idx]?.repeatLineId;
+    return typeof repeatOf === "number" && repeatOf >= 0 ? repeatOf : idx;
+  };
+
   cipai.lines.forEach((line, i) => {
-    const text = inputLines[i];
+    const resolvedIndex = resolveLineIndex(i);
+    const text = inputLines[resolvedIndex];
     if (!text) return;
     const chars = text.replace(/[^一-鿿]/g, "").split("");
 
@@ -151,7 +173,7 @@ function inferRhymeGroups(
 
   // For each rhymeId, find the majority rhyme group
   Object.keys(rhymeCharMap).forEach((key) => {
-    const rid = parseInt(key);
+    const rid = Number(key);
     const chars = rhymeCharMap[rid];
     const voteMap: Record<string, number> = {};
 
@@ -193,7 +215,11 @@ export function validatePoem(input: string, cipai: Cipai): PoemValidation {
 
   for (let i = 0; i < cipai.lines.length; i++) {
     const lineSchema = cipai.lines[i];
-    const userLineRaw = inputLines[i] || "";
+    const resolvedIndex = typeof lineSchema.repeatLineId === "number" &&
+        lineSchema.repeatLineId >= 0
+      ? lineSchema.repeatLineId
+      : i;
+    const userLineRaw = inputLines[resolvedIndex] || "";
     const chars = userLineRaw.replace(/[^一-鿿]/g, "").split("");
     const slots: ValidationResult[] = [];
 
@@ -242,6 +268,10 @@ export function validatePoem(input: string, cipai: Cipai): PoemValidation {
 
       const analysis = bestCandidate;
 
+      const isRequiredCharError = typeof slotSchema.requiredChar === "string" &&
+        slotSchema.requiredChar.length > 0 &&
+        char !== slotSchema.requiredChar;
+
       // Tone Check
       let isToneError = false;
       if (slotSchema.tone !== "Zhong" && slotSchema.tone !== analysis.tone) {
@@ -265,6 +295,7 @@ export function validatePoem(input: string, cipai: Cipai): PoemValidation {
         expectedTone: slotSchema.tone,
         actualTone: analysis.tone,
         isToneError,
+        isRequiredCharError,
         isRhymePosition: slotSchema.isRhyme,
         isRhymeError,
         isPolyphonic: candidates.length > 1,
@@ -279,7 +310,9 @@ export function validatePoem(input: string, cipai: Cipai): PoemValidation {
       overflow = chars.slice(lineSchema.pattern.length).join("");
     }
 
-    resultLines.push({ slots, overflow });
+    const missingCount = Math.max(0, lineSchema.pattern.length - slots.length);
+
+    resultLines.push({ slots, overflow, missingCount });
   }
 
   return {
