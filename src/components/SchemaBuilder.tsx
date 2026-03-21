@@ -85,31 +85,31 @@ export default function SchemaBuilder() {
   };
 
   return (
-    <div className="flex flex-col min-h-[650px] space-y-8 p-8 bg-[#faf9f6] rounded-sm shadow-lg border border-[#e8e4dc] relative overflow-hidden">
+    <div className="flex flex-col min-h-[650px] space-y-8 p-8 bg-[#FAF9F7] rounded-sm shadow-lg border border-[#E6E1D8] relative overflow-hidden">
       {/* 顶部装饰条 */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#5d4037] via-[#d6a45e] to-[#5d4037]">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#5B4A47] via-[#C6A46A] to-[#5B4A47]">
       </div>
 
       {/* 标题区 */}
-      <div className="flex items-center space-x-4 pb-6 border-b border-[#d6a45e]/20">
-        <div className="w-14 h-14 rounded-sm bg-gradient-to-br from-[#5d4037] to-[#4a332a] flex items-center justify-center shadow-md">
+      <div className="flex items-center space-x-4 pb-6 border-b border-[#C6A46A]/20">
+        <div className="w-14 h-14 rounded-sm bg-gradient-to-br from-[#5B4A47] to-[#4a332a] flex items-center justify-center shadow-md">
           <span className="text-white text-2xl font-bold">谱</span>
         </div>
         <div>
-          <h2 className="text-2xl font-bold tracking-[0.2em] text-[#1a1a1a]">
+          <h2 className="text-2xl font-bold tracking-[0.2em] text-[#2C363F]">
             词牌规则定义器
           </h2>
-          <p className="text-[#2b2b2b]/60 text-sm mt-1 tracking-wider">
+          <p className="text-[#475569]/60 text-sm mt-1 tracking-wider">
             自定义词牌格律 · 生成规则数据
           </p>
         </div>
       </div>
 
       {/* 说明区域 */}
-      <div className="bg-gradient-to-r from-[#f5f3f0] to-[#f0ede6] p-5 rounded-sm border border-[#d6a45e]/30">
+      <div className="bg-gradient-to-r from-[#F2EFE9] to-[#EFEBE5] p-5 rounded-sm border border-[#C6A46A]/30">
         <div className="flex items-start space-x-3">
           <svg
-            className="w-5 h-5 text-[#d6a45e] flex-shrink-0 mt-0.5"
+            className="w-5 h-5 text-[#C6A46A] flex-shrink-0 mt-0.5"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -120,31 +120,31 @@ export default function SchemaBuilder() {
             />
           </svg>
           <div className="flex-1">
-            <p className="text-[#1a1a1a] font-medium mb-3 tracking-wider">
+            <p className="text-[#2C363F] font-medium mb-3 tracking-wider">
               请使用以下格式定义格律：
             </p>
             <div className="flex flex-wrap gap-3">
-              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#7f8c5b]/30">
-                <span className="w-6 h-6 rounded-sm border-2 border-[#7f8c5b] bg-gradient-to-br from-[#f4f6f0] to-[#e8ebe0] flex items-center justify-center text-xs text-[#7f8c5b] font-bold">
+              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#698B6F]/30">
+                <span className="w-6 h-6 rounded-sm border-2 border-[#698B6F] bg-gradient-to-br from-[#f4f6f0] to-[#e8ebe0] flex items-center justify-center text-xs text-[#698B6F] font-bold">
                   平
                 </span>
-                <span className="text-sm text-[#2b2b2b]">平声</span>
+                <span className="text-sm text-[#475569]">平声</span>
               </div>
-              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#6b5b95]/30">
-                <span className="w-6 h-6 rounded-sm border-2 border-[#6b5b95] bg-gradient-to-br from-[#f5f3f9] to-[#ebe7f3] flex items-center justify-center text-xs text-[#6b5b95] font-bold">
+              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#6B7094]/30">
+                <span className="w-6 h-6 rounded-sm border-2 border-[#6B7094] bg-gradient-to-br from-[#f5f3f9] to-[#ebe7f3] flex items-center justify-center text-xs text-[#6B7094] font-bold">
                   仄
                 </span>
-                <span className="text-sm text-[#2b2b2b]">仄声</span>
+                <span className="text-sm text-[#475569]">仄声</span>
               </div>
-              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#d6a45e]/30">
-                <span className="w-6 h-6 rounded-sm border-2 border-[#d6a45e] bg-gradient-to-br from-[#faf9f6] to-[#f5f3f0] flex items-center justify-center text-xs text-[#d6a45e] font-bold">
+              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#C6A46A]/30">
+                <span className="w-6 h-6 rounded-sm border-2 border-[#C6A46A] bg-gradient-to-br from-[#FAF9F7] to-[#F2EFE9] flex items-center justify-center text-xs text-[#C6A46A] font-bold">
                   通
                 </span>
-                <span className="text-sm text-[#2b2b2b]">可平可仄</span>
+                <span className="text-sm text-[#475569]">可平可仄</span>
               </div>
-              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#c04851]/30">
-                <span className="text-xs text-[#c04851] font-bold">[韵]</span>
-                <span className="text-sm text-[#2b2b2b]">标记韵脚</span>
+              <div className="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-sm border border-[#CC5855]/30">
+                <span className="text-xs text-[#CC5855] font-bold">[韵]</span>
+                <span className="text-sm text-[#475569]">标记韵脚</span>
               </div>
             </div>
           </div>
@@ -154,9 +154,9 @@ export default function SchemaBuilder() {
       {/* 表单区域 */}
       <div className="flex flex-col space-y-6 flex-1">
         <div className="flex flex-col space-y-3">
-          <label className="font-semibold text-[#1a1a1a] tracking-wider flex items-center space-x-2">
+          <label className="font-semibold text-[#2C363F] tracking-wider flex items-center space-x-2">
             <svg
-              className="w-5 h-5 text-[#d6a45e]"
+              className="w-5 h-5 text-[#C6A46A]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -172,7 +172,7 @@ export default function SchemaBuilder() {
           </label>
           <input
             type="text"
-            className="bg-white border-2 border-[#e5e7eb] rounded-sm px-5 py-3.5 font-serif text-lg focus:outline-none focus:border-[#d6a45e] focus:ring-4 focus:ring-[#d6a45e]/20 transition-all duration-200 ease-out text-[#1a1a1a] placeholder-[#2b2b2b]/40 hover:border-[#d6a45e]/50"
+            className="bg-white border-2 border-[#e5e7eb] rounded-sm px-5 py-3.5 font-serif text-lg focus:outline-none focus:border-[#C6A46A] focus:ring-4 focus:ring-[#C6A46A]/20 transition-all duration-200 ease-out text-[#2C363F] placeholder-[#475569]/40 hover:border-[#C6A46A]/50"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="例如：长相思、浣溪沙、菩萨蛮"
@@ -180,9 +180,9 @@ export default function SchemaBuilder() {
         </div>
 
         <div className="flex flex-col space-y-3 flex-1">
-          <label className="font-semibold text-[#1a1a1a] tracking-wider flex items-center space-x-2">
+          <label className="font-semibold text-[#2C363F] tracking-wider flex items-center space-x-2">
             <svg
-              className="w-5 h-5 text-[#7f8c5b]"
+              className="w-5 h-5 text-[#698B6F]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -197,13 +197,13 @@ export default function SchemaBuilder() {
             <span>格律定义</span>
           </label>
           <textarea
-            className="flex-1 min-h-[320px] bg-white border-2 border-[#e5e7eb] rounded-sm p-6 font-serif text-xl leading-relaxed resize-y focus:outline-none focus:border-[#7f8c5b] focus:ring-4 focus:ring-[#7f8c5b]/20 transition-all duration-200 ease-out text-[#1a1a1a] placeholder-[#2b2b2b]/40 hover:border-[#7f8c5b]/50"
+            className="flex-1 min-h-[320px] bg-white border-2 border-[#e5e7eb] rounded-sm p-6 font-serif text-xl leading-[2.5] tracking-widest resize-y focus:outline-none focus:border-[#698B6F] focus:ring-4 focus:ring-[#698B6F]/20 transition-all duration-200 ease-out text-[#2C363F] placeholder-[#475569]/40 hover:border-[#698B6F]/50"
             value={patternInput}
             onChange={(e) => setPatternInput(e.target.value)}
             placeholder={`请输入格律格式，例如：\n\n平平仄仄平平仄 [韵]\n通仄平平仄 [韵]\n通仄平平平仄仄\n仄平平仄仄平平 [韵]`}
           />
           {error && (
-            <div className="flex items-center space-x-2 text-[#c04851] bg-gradient-to-r from-[#fef5f6] to-[#fdf0f2] px-4 py-3 rounded-sm border border-[#c04851]/30 animate-fade-in-down">
+            <div className="flex items-center space-x-2 text-[#CC5855] bg-gradient-to-r from-[#fef5f6] to-[#fdf0f2] px-4 py-3 rounded-sm border border-[#CC5855]/30 animate-fade-in-down">
               <svg
                 className="w-5 h-5 flex-shrink-0"
                 fill="currentColor"
@@ -222,7 +222,7 @@ export default function SchemaBuilder() {
 
         <div className="py-4">
           <button
-            className="group relative inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#5d4037] to-[#4a332a] text-white font-semibold py-4 px-10 rounded-sm hover:from-[#6d5047] hover:to-[#5a433a] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 ease-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#5d4037]/40 overflow-hidden"
+            className="group relative inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#5B4A47] to-[#4a332a] text-white font-semibold py-4 px-10 rounded-sm hover:from-[#6d5047] hover:to-[#5a433a] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 ease-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#5B4A47]/40 overflow-hidden"
             onClick={parsePattern}
             type="button"
           >
@@ -248,11 +248,11 @@ export default function SchemaBuilder() {
 
       {/* 生成结果 */}
       {generatedSchema && (
-        <div className="mt-6 pt-8 border-t-2 border-[#d6a45e]/30 animate-scale-in">
+        <div className="mt-6 pt-8 border-t-2 border-[#C6A46A]/30 animate-scale-in">
           <div className="flex items-center justify-between mb-4">
-            <label className="font-semibold text-[#1a1a1a] tracking-wider flex items-center space-x-2">
+            <label className="font-semibold text-[#2C363F] tracking-wider flex items-center space-x-2">
               <svg
-                className="w-5 h-5 text-[#4e7ca1]"
+                className="w-5 h-5 text-[#6286A0]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -266,7 +266,7 @@ export default function SchemaBuilder() {
               </svg>
               <span>生成的规则数据</span>
             </label>
-            <span className="text-xs text-[#2b2b2b]/50 flex items-center space-x-1">
+            <span className="text-xs text-[#475569]/50 flex items-center space-x-1">
               <svg
                 className="w-4 h-4"
                 fill="none"
@@ -284,13 +284,13 @@ export default function SchemaBuilder() {
             </span>
           </div>
           <textarea
-            className="w-full min-h-[220px] bg-gradient-to-br from-[#faf9f6] to-[#f5f3f0] border-2 border-[#d6a45e]/40 rounded-sm p-5 font-mono text-sm text-[#1a1a1a] focus:outline-none focus:border-[#d6a45e] focus:ring-4 focus:ring-[#d6a45e]/20 transition-all duration-200 ease-out resize-y hover:border-[#d6a45e]/60"
+            className="w-full min-h-[220px] bg-gradient-to-br from-[#FAF9F7] to-[#F2EFE9] border-2 border-[#C6A46A]/40 rounded-sm p-5 font-mono text-sm text-[#2C363F] focus:outline-none focus:border-[#C6A46A] focus:ring-4 focus:ring-[#C6A46A]/20 transition-all duration-200 ease-out resize-y hover:border-[#C6A46A]/60"
             readOnly
             value={generatedSchema}
           />
-          <div className="mt-4 flex items-center space-x-2 text-sm text-[#2b2b2b]/60 bg-[#f5f3f0] px-4 py-3 rounded-sm border border-[#d6a45e]/20">
+          <div className="mt-4 flex items-center space-x-2 text-sm text-[#475569]/60 bg-[#F2EFE9] px-4 py-3 rounded-sm border border-[#C6A46A]/20">
             <svg
-              className="w-5 h-5 text-[#d6a45e]"
+              className="w-5 h-5 text-[#C6A46A]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -315,7 +315,7 @@ export default function SchemaBuilder() {
             fill="none"
             stroke="currentColor"
             strokeWidth="0.5"
-            className="text-[#1a1a1a]"
+            className="text-[#2C363F]"
           />
         </svg>
       </div>

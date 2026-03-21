@@ -6,32 +6,32 @@
 
 :root {
   /* 传统中国色 */
-  --color-xuan-paper: #f8f5f0; /* 宣纸白 */
+  --color-xuan-paper: #F7F6F2; /* 宣纸白 */
   --color-mi-se: #f5f0e8; /* 秘色瓷 */
-  --color-ink-black: #1a1a1a; /* 墨黑 */
-  --color-ink-light: #2b2b2b; /* 淡墨 */
-  --color-zhu-sha: #c04851; /* 朱砂 */
+  --color-ink-black: #2C363F; /* 墨黑 */
+  --color-ink-light: #475569; /* 淡墨 */
+  --color-zhu-sha: #CC5855; /* 朱砂 */
   --color-yan-zhi: #d66a72; /* 胭脂 */
-  --color-qing-dai: #4e7ca1; /* 青黛 */
-  --color-shi-lu: #7f8c5b; /* 石绿 */
-  --color-liu-huang: #d6a45e; /* 流黄/金黄 */
-  --color-zi-tan: #5d4037; /* 紫檀 */
+  --color-qing-dai: #6286A0; /* 青黛 */
+  --color-shi-lu: #698B6F; /* 石绿 */
+  --color-liu-huang: #C6A46A; /* 流黄/金黄 */
+  --color-zi-tan: #5B4A47; /* 紫檀 */
   --color-qing-hua: #6b8c9e; /* 青花 */
 
   /* 渐变 */
   --gradient-paper: linear-gradient(
     135deg,
-    #f8f5f0 0%,
-    #f0ede6 50%,
-    #e8e4dc 100%
+    #F7F6F2 0%,
+    #EFEBE5 50%,
+    #E6E1D8 100%
   );
   --gradient-gold: linear-gradient(
     135deg,
-    #d6a45e 0%,
+    #C6A46A 0%,
     #c9964a 50%,
-    #b8863a 100%
+    #A88952 100%
   );
-  --gradient-ink: linear-gradient(180deg, #1a1a1a 0%, #2b2b2b 100%);
+  --gradient-ink: linear-gradient(180deg, #2C363F 0%, #475569 100%);
 
   /* 阴影 */
   --shadow-soft: 0 2px 8px rgba(26, 26, 26, 0.08);
@@ -69,7 +69,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-liu-huang) 0%, #b8863a 100%);
+  background: linear-gradient(180deg, var(--color-liu-huang) 0%, #A88952 100%);
   border-radius: 4px;
 }
 
