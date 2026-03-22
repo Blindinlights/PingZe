@@ -155,14 +155,14 @@ export default function PoetryLinter() {
               </button>
 
               {isCipaiOpen && (
-                <div className="absolute left-0 right-0 top-full z-30 mt-3 max-h-80 overflow-y-auto border border-[var(--line-strong)] bg-[rgba(250,246,238,0.96)] p-2 shadow-[0_18px_36px_rgba(106,94,72,0.12)] backdrop-blur-md">
+                <div className="absolute left-0 right-0 top-full z-30 mt-3 max-h-80 overflow-y-auto border border-[var(--line-strong)] bg-[var(--surface-dropdown)] p-2 shadow-[var(--shadow-elevated)] backdrop-blur-md">
                   {CIPAI_LIST.map((cipai) => (
                     <button
                       key={cipai.name}
                       className={`flex w-full items-center justify-between px-4 py-3 text-left transition duration-200 ${
                         selectedCipai.name === cipai.name
-                          ? "bg-[rgba(130,156,144,0.14)] text-[var(--text-primary)]"
-                          : "text-[var(--text-secondary)] hover:bg-[rgba(130,156,144,0.08)] hover:text-[var(--text-primary)]"
+                          ? "bg-[var(--surface-tint)] text-[var(--text-primary)]"
+                          : "text-[var(--text-secondary)] hover:bg-[var(--surface-soft)] hover:text-[var(--text-primary)]"
                       }`}
                       onClick={() => {
                         setSelectedCipai(cipai);

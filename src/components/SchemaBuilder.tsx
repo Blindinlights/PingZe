@@ -111,7 +111,7 @@ export default function SchemaBuilder() {
               key={item.token}
               className="flex items-center justify-between border-b border-[var(--line-soft)] pb-3 text-sm text-[var(--text-secondary)]"
             >
-              <span className="inline-flex min-w-12 items-center justify-center border border-[var(--line-strong)] bg-[rgba(255,255,255,0.04)] px-3 py-1 text-[var(--text-primary)]">
+              <span className="inline-flex min-w-12 items-center justify-center border border-[var(--line-strong)] bg-[var(--surface-hint)] px-3 py-1 text-[var(--text-primary)]">
                 {item.token}
               </span>
               <span>{item.detail}</span>

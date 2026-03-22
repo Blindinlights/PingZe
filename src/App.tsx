@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PoetryLinter from "./components/PoetryLinter.tsx";
 import SchemaBuilder from "./components/SchemaBuilder.tsx";
 import { CIPAI_LIST } from "./data/cipai-list.ts";
 
 type AppTab = "linter" | "builder";
+type ThemeMode = "light" | "dark";
+
+const THEME_STORAGE_KEY = "poem-theme-mode";
 
 const tabs: { id: AppTab; label: string; detail: string }[] = [
   {
@@ -18,8 +21,30 @@ const tabs: { id: AppTab; label: string; detail: string }[] = [
   },
 ];
 
+function getPreferredTheme(): ThemeMode {
+  if (typeof window === "undefined") {
+    return "light";
+  }
+
+  const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
 function App() {
   const [activeTab, setActiveTab] = useState<AppTab>("linter");
+  const [themeMode, setThemeMode] = useState<ThemeMode>(getPreferredTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = themeMode;
+    document.documentElement.style.colorScheme = themeMode;
+    window.localStorage.setItem(THEME_STORAGE_KEY, themeMode);
+  }, [themeMode]);
 
   return (
     <div className="min-h-screen overflow-x-hidden text-[var(--text-primary)]">
@@ -33,9 +58,31 @@ function App() {
                 <span className="h-px w-10 bg-[var(--line-strong)]"></span>
                 <span>词律工作台</span>
               </div>
-              <span className="hidden md:inline">
-                平仄 · 韵脚 · 词牌规则
-              </span>
+              <div className="flex items-center gap-3 md:gap-4">
+                <span className="hidden md:inline">
+                  平仄 · 韵脚 · 词牌规则
+                </span>
+                <button
+                  aria-label={`切换到${
+                    themeMode === "light" ? "暗色" : "浅色"
+                  }主题`}
+                  className="theme-toggle"
+                  onClick={() =>
+                    setThemeMode((current) =>
+                      current === "light" ? "dark" : "light"
+                    )}
+                  type="button"
+                >
+                  <span className="theme-toggle__track">
+                    <span className="theme-toggle__thumb">
+                      {themeMode === "light" ? "日" : "夜"}
+                    </span>
+                  </span>
+                  <span className="theme-toggle__label">
+                    {themeMode === "light" ? "纸面" : "夜读"}
+                  </span>
+                </button>
+              </div>
             </div>
 
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_320px] lg:items-end">
