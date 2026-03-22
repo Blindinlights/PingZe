@@ -466,11 +466,6 @@ body::before {
   letter-spacing: 0.12em;
 }
 
-.status-pill--idle {
-  background: var(--surface-chip);
-  color: var(--text-muted);
-}
-
 .status-pill--success {
   background: var(--success-soft);
   color: var(--success-text);
@@ -496,20 +491,6 @@ body::before {
 .result-row:first-child {
   border-top: 0;
   padding-top: 0;
-}
-
-.result-index {
-  display: inline-flex;
-  min-width: 2.8rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0;
-  border: 1px solid var(--line-strong);
-  background: var(--surface-tint);
-  padding: 0.55rem 0.7rem;
-  color: var(--accent-soft);
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
 }
 
 .tone-cell {
