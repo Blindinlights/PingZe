@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "LXGW WenKai GB Web";
+  src: url("/fonts/LXGWWenKaiGB-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
 :root {
   --bg: #f6f1e7;
   --bg-deep: #efe7da;
@@ -513,6 +521,7 @@ body::before {
   justify-content: center;
   border: 1px solid var(--line-soft);
   border-radius: 0;
+  overflow: hidden;
   background: var(--tone-base);
   color: var(--text-muted);
   font-size: 1.25rem;
@@ -559,6 +568,58 @@ body::before {
   box-shadow: inset 0 0 0 1px var(--tone-error-inset);
 }
 
+.tone-cell--grid::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 0.5px);
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(113, 89, 60, 0.34) 0 0.24rem,
+    transparent 0.24rem 0.44rem
+  );
+  pointer-events: none;
+}
+
+.tone-cell--grid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(50% - 0.5px);
+  height: 1px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(113, 89, 60, 0.34) 0 0.24rem,
+    transparent 0.24rem 0.44rem
+  );
+  pointer-events: none;
+}
+
+.tone-cell__content,
+.tone-cell__dot {
+  position: relative;
+  z-index: 1;
+}
+
+.tone-cell__content {
+  font-family: var(--font-body);
+  font-size: 1.18rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.tone-cell__content--filled {
+  font-family: "LXGW WenKai GB Web", "LXGW WenKai GB", "LXGW WenKai",
+    "BiauKai", "DFKai-SB", "STKaiti", "KaiTi", "Kaiti SC", "KaiTi TC",
+    serif;
+  font-size: 1.42rem;
+  font-weight: 500;
+  font-synthesis: none;
+}
+
 .tone-cell__dot {
   position: absolute;
   right: 0.38rem;
@@ -571,6 +632,7 @@ body::before {
 
 .tone-cell__rhyme {
   position: absolute;
+  z-index: 1;
   bottom: 0.18rem;
   right: 0.28rem;
   color: var(--accent);

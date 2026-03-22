@@ -373,10 +373,20 @@ export default function PoetryLinter() {
                                     slotResult
                                       ? "tone-cell--filled"
                                       : "tone-cell--empty"
-                                  } ${hasError ? "tone-cell--error" : ""}`}
+                                  } tone-cell--grid ${
+                                    hasError ? "tone-cell--error" : ""
+                                  }`}
                                   title={tooltipParts.join(" | ")}
                                 >
-                                  {content}
+                                  <span
+                                    className={`tone-cell__content ${
+                                      slotResult
+                                        ? "tone-cell__content--filled"
+                                        : ""
+                                    }`}
+                                  >
+                                    {content}
+                                  </span>
 
                                   {slotResult?.isPolyphonic && (
                                     <span className="tone-cell__dot"></span>
